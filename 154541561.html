@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -15,7 +14,40 @@
       color: #f1c40f;
       margin: 0;
       padding: 20px;
+      padding-top: 60px; /* pour navbar fixe */
       text-align: center;
+      scroll-behavior: smooth;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #222;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+      z-index: 100;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      margin: 0; padding: 10px 0;
+    }
+
+    .navbar li {
+      margin: 0 15px;
+    }
+
+    .navbar a {
+      color: #f1c40f;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    .navbar a:hover, .navbar a.active {
+      color: #fff;
     }
 
     h1 {
@@ -24,37 +56,52 @@
       text-shadow: 0 0 8px #f1c40f;
     }
 
-    .contact-info {
-      margin-bottom: 20px;
-    }
-
-    .contact-info a {
-      color: #f1c40f;
-      text-decoration: none;
-      margin: 0 12px;
-      font-size: 1.1em;
-      transition: color 0.3s ease;
-    }
-
-    .contact-info a:hover {
-      color: #fff;
-    }
-
     section {
       max-width: 600px;
-      margin: 0 auto 40px;
+      margin: 20px auto 40px;
       text-align: left;
       background: #222;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 15px #f1c40f;
+      display: none; /* cacher toutes les sections par défaut */
+    }
+
+    section.visible {
+      display: block;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     section h2 {
       color: #f1c40f;
-      text-align: center;
       margin-bottom: 15px;
       text-shadow: 0 0 6px #f1c40f;
+      text-align: center;
+      position: relative;
+      padding-top: 70px;
+    }
+
+    /* Image au-dessus du titre */
+    section h2 img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #f1c40f;
     }
 
     section p {
@@ -102,101 +149,162 @@
       color: #f1c40f;
       margin: 0 10px;
       font-size: 1.8em;
-      transition: color 0.3s ease;
+      transition: color 0.3s ease, filter 0.3s ease;
       text-decoration: none;
+      filter: drop-shadow(0 0 2px #f1c40f);
     }
 
     .social-links a:hover {
       color: #fff;
+      filter: drop-shadow(0 0 6px #f39c12);
     }
 
-    .youtube-link {
+    a.channel-link {
       display: inline-block;
       margin-top: 10px;
-      font-size: 1.2em;
+      font-weight: bold;
       color: #f1c40f;
-      text-decoration: none;
+      text-decoration: underline;
       transition: color 0.3s ease;
     }
 
-    .youtube-link:hover {
+    a.channel-link:hover {
       color: #fff;
     }
 
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      color: #888;
-      font-size: 0.9em;
+    /* Responsive */
+    @media (max-width: 600px) {
+      section {
+        margin: 10px;
+        padding: 15px;
+      }
+      .social-links a {
+        font-size: 1.5em;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      nav {
+        font-size: 0.9em;
+      }
+      section h2 {
+        padding-top: 80px;
+      }
+      section h2 img {
+        width: 50px;
+        height: 50px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Adam Quatra</h1>
-  <div class="contact-info">
-    <a href="mailto:katraadam2010@gmail.com"><i class="fas fa-envelope"></i> katraadam2010@gmail.com</a>
-    <a href="https://www.youtube.com/channel/UCCBywHdsw2TgYCLhXNVHADA" target="_blank" rel="noopener noreferrer">
-      <i class="fab fa-youtube"></i> My YouTube Channel
-    </a>
-  </div>
 
-  <section>
-    <h2>About Me</h2>
-    <p>My name is <strong>Adam Quatra</strong>, I'm <strong>14 years old</strong>, and I live in <strong>Morocco</strong>. I'm a student who loves learning new things and exploring the world of technology.</p>
-    
-    <div class="flag-container">
+  <nav>
+    <ul class="navbar">
+      <li><a href="#" data-target="about" class="active">About Me</a></li>
+      <li><a href="#" data-target="hobbies">Hobbies</a></li>
+      <li><a href="#" data-target="goals">Goals</a></li>
+      <li><a href="#" data-target="contact">Contact Me</a></li>
+      <li><a href="#" data-target="youtube">YouTube Channel</a></li>
+    </ul>
+  </nav>
+
+  <h1>Adam Quatra</h1>
+
+  <section id="about" class="visible">
+    <h2>
       <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg" alt="Flag of Morocco" />
-    </div>
-    
-    <div class="slider">
-      <img class="slides active" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg" alt="Flag of Morocco" />
-      <img class="slides" src="https://images.unsplash.com/photo-1561510799-07bc2f0c302e?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Jemaa el-Fnaa, Marrakech, Morocco" />
-      <img class="slides" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Moroccan Desert" />
+      About Me
+    </h2>
+    <p>My name is <strong>Adam Quatra</strong>, I'm <strong>14 years old</strong>, and I live in <strong>Morocco</strong>. I'm a student who loves learning new things and exploring the world of technology.</p>
+    <div class="flag-container">
     </div>
   </section>
 
-  <section>
-    <h2>Hobbies</h2>
+  <section id="hobbies">
+    <h2>
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&q=80" alt="Hobbies Icon" />
+      Hobbies
+    </h2>
     <p>I enjoy programming, playing video games, creating websites, learning about space and science, and spending time with my friends. I also like watching tech videos and tutorials on YouTube.</p>
   </section>
 
-  <section>
-    <h2>Goals</h2>
-    <p>My goal is to become a skilled developer or engineer in the future. I want to build apps,maybe games, and websites that help people and make life easier. I'm also interested in AI and robotics.</p>
+  <section id="goals">
+    <h2>
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&q=80" alt="Technology Icon" />
+      Goals
+    </h2>
+    <p>My goal is to become a skilled developer or engineer in the future. I want to build apps, maybe games, and websites that help people and make life easier. I'm also interested in AI and robotics.</p>
   </section>
 
-  <section>
-    <h2>Contact Me</h2>
+  <section id="contact">
+    <h2>
+      <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Contact Icon" />
+      Contact Me
+    </h2>
     <p>If you want to follow me or send me a message, here are my social media links:</p>
     <div class="social-links">
-      <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-      <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="mailto:katraadam2010@gmail.com" title="Email me">
+        <i class="fas fa-envelope"></i>
+        </a>
+      <a href="https://discord.com/users/adamquatra2010" target="_blank" rel="noopener noreferrer" title="Discord">
+        <i class="fab fa-discord"></i>
+      </a>
     </div>
   </section>
-<!-- JavaScript for Auto Slide -->
-  <section>
-    <h2>My YouTube Channel</h2>
-    <p>I also create and share content on YouTube. You can check out my channel here:</p>
-    <a class="youtube-link" href="https://www.youtube.com/channel/UCCBywHdsw2TgYCLhXNVHADA" target="_blank" rel="noopener noreferrer">
-      <i class="fab fa-youtube"></i> Visit my YouTube Channel
-    </a>
-  </section>
-<script>
-  let slideIndex = 0;
-  const slides = document.querySelectorAll('.slides');
 
-  function showSlides() {
-    // hide all
-    slides.forEach((slide) => (slide.classList.remove('active')));
-    // show current
-    slides[slideIndex].classList.add('active');
-    // next index
-    slideIndex = (slideIndex + 1) % slides.length;
-    setTimeout(showSlides, 3000); // change every 3s
-  }
-  <footer>
-    <p>© 2025 Adam Quatra. All rights reserved.</p>
-  </footer>
+  <section id="youtube">
+    <h2>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube Icon" style="width:60px; height:35px; border-radius:0; box-shadow:none; position:absolute; top:12px; left:50%; transform: translateX(-50%);" />
+      My YouTube Channel
+    </h2>
+    <p>I also create and share content on YouTube. You can check out my channel here:</p>
+    <a
+      href="https://www.youtube.com/channel/UCCBywHdsw2TgYCLhXNVHADA"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="channel-link"
+      >Adam Quatra's YouTube Channel</a
+    >
+  </section>
+
+  <script>
+    const links = document.querySelectorAll('.navbar a');
+    const sections = document.querySelectorAll('section');
+
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Enlever la classe active de tous les liens
+        links.forEach(l => l.classList.remove('active'));
+
+        // Ajouter la classe active au lien cliqué
+        link.classList.add('active');
+
+        const target = link.getAttribute('data-target');
+
+        // Afficher la section correspondante, cacher les autres
+        sections.forEach(section => {
+          if(section.id === target) {
+            section.classList.add('visible');
+          } else {
+            section.classList.remove('visible');
+          }
+        });
+      });
+    });
+
+    // Simple slider automatique pour les images de la section About Me
+    const slides = document.querySelectorAll('.slider .slides');
+    let currentSlide = 0;
+
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 4000);
+  </script>
+
 </body>
 </html>
